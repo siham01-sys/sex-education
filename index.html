@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SportsPro - صور رياضية حصرية</title>
+  <meta name="description" content="آلاف الصور الرياضية الاحترافية بأقل من $7 شهرياً">
+  <meta name="keywords" content="رياضة, تمارين, لياقة, صور رياضية">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; color: #222; background: #f5f5f5; }
+    .nav { background: #0f0f1a; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav .logo { color: #e74c3c; font-size: 1.2rem; font-weight: bold; }
+    .btn-subscribe { background: #e74c3c; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-size: 13px; cursor: pointer; }
+    .hero { background: #1a1a2e; color: white; padding: 3rem 2rem; text-align: center; }
+    .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .hero p { color: #aaa; margin-bottom: 1.5rem; }
+    .badge { display: inline-block; background: #e74c3c; color: white; padding: 4px 14px; border-radius: 20px; font-size: 12px; margin-bottom: 1rem; }
+    .btn-hero { background: #e74c3c; color: white; border: none; padding: 12px 32px; border-radius: 20px; font-size: 15px; cursor: pointer; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 2rem; }
+    .stat { background: white; border: 1px solid #eee; border-radius: 12px; padding: 1rem; text-align: center; }
+    .stat-num { font-size: 1.8rem; font-weight: bold; color: #e74c3c; }
+    .stat-label { font-size: 12px; color: #888; }
+    .section { padding: 2rem; }
+    .section-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 1.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .card { background: white; border: 1px solid #eee; border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-4px); }
+    .card-img { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .gym { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+    .run { background: linear-gradient(135deg, #0f3460, #533483); }
+    .box { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+    .yoga { background: linear-gradient(135deg, #27ae60, #145a32); }
+    .swim { background: linear-gradient(135deg, #2980b9, #1a5276); }
+    .bike { background: linear-gradient(135deg, #f39c12, #d35400); }
+    .card-body { padding: 1rem; }
+    .card-title { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
+    .card-sub { font-size: 12px; color: #888; }
+    .lock-badge { display: inline-block; background: #f5f5f5; border: 1px solid #eee; padding: 3px 10px; border-radius: 12px; font-size: 11px; color: #888; margin-top: 8px; }
+    .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .plan { background: white; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; text-align: center; position: relative; }
+    .plan.featured { border: 2px solid #e74c3c; }
+    .plan-badge { position: absolute; top: -12px; right: 50%; transform: translateX(50%); background: #e74c3c; color: white; padding: 3px 14px; border-radius: 12px; font-size: 11px; white-space: nowrap; }
+    .plan-name { font-size: 18px; font-weight: bold; margin-bottom: 0.5rem; }
+    .plan-price { font-size: 2.5rem; font-weight: bold; color: #e74c3c; }
+    .plan-price span { font-size: 14px; color: #888; }
+    .plan-features { list-style: none; margin: 1rem 0; text-align: right; }
+    .plan-features li { font-size: 13px; color: #555; padding: 4px 0; border-bottom: 1px solid #eee; }
+    .plan-features li::before { content: "✓ "; color: #27ae60; font-weight: bold; }
+    .btn-plan { width: 100%; padding: 10px; border-radius: 20px; border: 1px solid #ddd; background: transparent; cursor: pointer; font-size: 14px; margin-top: 0.5rem; }
+    .btn-plan.red { background: #e74c3c; color: white; border: none; }
+    footer { background: #0f0f1a; color: #888; text-align: center; padding: 1.5rem; font-size: 13px; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: white; border-radius: 12px; padding: 2rem; max-width: 360px; width: 90%; text-align: center; }
+    .modal h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .modal p { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+    .modal-btns { display: flex; gap: 0.5rem; }
+    .modal-btns button { flex: 1; padding: 10px; border-radius: 20px; cursor: pointer; font-size: 14px; }
+    .btn-close { background: transparent; border: 1px solid #ddd; }
+    .btn-go { background: #e74c3c; color: white; border: none; }
+  </style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">⚡ SportsPro</div>
+  <button class="btn-subscribe" onclick="showModal()">اشترك الآن</button>
+</div>
+
+<div class="hero">
+  <div class="badge">🔥 محتوى حصري</div>
+  <h1>عالم الرياضة الاحترافية</h1>
+  <p>آلاف الصور والبرامج الرياضية الحصرية — تمارين، تحفيز، تحولات مذهلة</p>
+  <button class="btn-hero" onclick="showModal()">ابدأ مجاناً لمدة 7 أيام</button>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">+500</div><div class="stat-label">صورة حصرية</div></div>
+  <div class="stat"><div class="stat-num">+1200</div><div class="stat-label">مشترك</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">رضا العملاء</div></div>
+</div>
+
+<div class="section">
+  <div class="section-title">📸 معاينة المحتوى</div>
+  <div class="grid">
+    <div class="card" onclick="showModal()">
+      <div class="card-img gym">🏋️</div>
+      <div class="card-body">
+        <div class="card-title">تمارين القوة</div>
+        <div class="card-sub">برامج تدريبية احترافية</div>
+        <div class="lock-badge">🔒 حصري للمشتركين</div>
+      </div>
+    </div>
+    <div class="card" onclick="showModal()">
+      <div class="card-img run">🏃</div>
+      <div class="card-body">
+        <div class="card-title">تمارين الجري</div>
+        <div class="card-sub">خطط اللياقة والتحمل</div>
+        <div class="lock-badge">🔒 حصري للمشتركين</div>
+      </div>
+    </div>
+    <div class="card" onclick="showModal()">
+      <div class="card-img box">🥊</div>
+      <div class="card-body">
+        <div class="card-title">فنون القتال</div>
+        <div class="card-sub">الملاكمة والمصارعة</div>
+        <div class="lock-badge">🔒 حصري للمشتركين</div>
+      </div>
+    </div>
+    <div class="card" onclick="showModal()">
+      <div class="card-img yoga">🧘</div>
+      <div class="card-body">
+        <div class="card-title">اليوغا واللياقة</div>
+        <div class="card-sub">تمارين التمدد والاسترخاء</div>
+        <div class="lock-badge">🔒 حصري للمشتركين</div>
+      </div>
+    </div>
+    <div class="card" onclick="showModal()">
+      <div class="card-img swim">🏊</div>
+      <div class="card-body">
+        <div class="card-title">السباحة</div>
+        <div class="card-sub">تقنيات السباحة الاحترافية</div>
+        <div class="lock-badge">🔒 حصري للمشتركين</div>
+      </div>
+    </div>
+    <div class="card" onclick="showModal()">
+      <div class="card-img bike">🚴</div>
+      <div class="card-body">
+        <div class="card-title">ركوب الدراجات</div>
+        <div class="card-sub">تدريبات الدراجة الاحترافية</div>
+        <div class="lock-badge">🔒 حصري للمشتركين</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">👑 اختر خطتك</div>
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-name">أساسي</div>
+      <div class="plan-price">$3 <span>/شهر</span></div>
+      <ul class="plan-features">
+        <li>100 صورة شهرياً</li>
+        <li>برامج تدريبية أساسية</li>
+        <li>نصائح التغذية</li>
+      </ul>
+      <button class="btn-plan" onclick="showModal()">ابدأ الآن</button>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">الأكثر شعبية</div>
+      <div class="plan-name">احترافي</div>
+      <div class="plan-price">$7 <span>/شهر</span></div>
+      <ul class="plan-features">
+        <li>وصول كامل لكل المحتوى</li>
+        <li>برامج تدريبية متقدمة</li>
+        <li>فيديوهات حصرية</li>
+        <li>دعم مباشر</li>
+      </ul>
+      <button class="btn-plan red" onclick="showModal()">ابدأ الآن</button>
+    </div>
+    <div class="plan">
+      <div class="plan-name">سنوي</div>
+      <div class="plan-price">$50 <span>/سنة</span></div>
+      <ul class="plan-features">
+        <li>كل مميزات الاحترافي</li>
+        <li>توفير 40%</li>
+        <li>محتوى أرشيفي كامل</li>
+      </ul>
+      <button class="btn-plan" onclick="showModal()">ابدأ الآن</button>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 SportsPro — جميع الحقوق محفوظة</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div style="font-size:2rem; margin-bottom:1rem">🔒</div>
+    <h3>هذا المحتوى حصري</h3>
+    <p>اشترك الآن للوصول لآلاف الصور والبرامج الرياضية الاحترافية</p>
+    <div class="modal-btns">
+      <button class="btn-close" onclick="closeModal()">لاحقاً</button>
+      <button class="btn-go">اشترك الآن</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showModal() { document.getElementById('modal').classList.add('open'); }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+
+</body>
+</html>
